@@ -79,8 +79,11 @@ def chi2(Pij, normalizedCountMatrix):
     chi = ITER_COUNT * np.sum(np.square(normalizedCountMatrix - Pij) / Pij)
     print(f'Коэффициент согласия Пирсона = {chi}')
     ppf = stats.chi2.ppf(0.95, Pij.shape[0] * Pij.shape[1] - 1)
-    print(chi, '<' if chi < ppf else '>', ppf, '\n')
-    pass
+    print(chi, '<' if chi < ppf else '>', ppf)
+    if chi < ppf:
+        print(f'Эмпирическое распределение сходится к теоретическому\n')
+    else:
+        print(f'Эмпирическое распределение не сходится к теоретическому\n')
 
 
 def intervalM(MA, DA, MB, DB):
